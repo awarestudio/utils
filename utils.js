@@ -20,3 +20,11 @@ function linspace(start, stop, num, endPoint=true, retstep=false) {
         return arr
     }
 }
+
+function drawDebugLines(layer) {
+    layer.line(0, 0, layer.width, 0)
+    layer.line(layer.width, 0, layer.width, layer.height)
+    layer.line(layer.width, layer.height, 0, layer.height)
+    layer.line(0, layer.height, 0, 0)
+    layer.line(0, 0, layer.width, layer.height)
+}
