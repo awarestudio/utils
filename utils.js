@@ -21,10 +21,9 @@ function linspace(start, stop, num, endPoint=true, retstep=false) {
     }
 }
 
-function drawDebugLines(layer) {
-    layer.line(0, 0, layer.width, 0)
-    layer.line(layer.width, 0, layer.width, layer.height)
-    layer.line(layer.width, layer.height, 0, layer.height)
-    layer.line(0, layer.height, 0, 0)
+function drawDebugLines(layer, debugColor="magenta", debugWeight=1) {
+    layer.stroke(debugColor)
+    layer.strokeWeight(debugWeight)
+    layer.rect(0, 0, layer.width, layer.height)
     layer.line(0, 0, layer.width, layer.height)
 }
