@@ -20,3 +20,21 @@ function linspace(start, stop, num, endPoint=true, retstep=false) {
         return arr
     }
 }
+
+function drawDebugLines(layer, debugColor="magenta", debugWeight=1) {
+    layer.stroke(debugColor)
+    layer.strokeWeight(debugWeight)
+    layer.rect(0, 0, layer.width, layer.height)
+    layer.line(0, 0, layer.width, layer.height)
+}
+
+function keyTyped() {
+    if (key == 's') {
+        saveImage()
+    }
+}
+
+function saveImage(extension='png'){
+    timestamp = year() + "_" + month() + "_" + day() + "_" + hour() + "_" + minute() + "_" + second() + "_" + nf(millis(), 3, 0)
+    save(timestamp + extension)
+}
