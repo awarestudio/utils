@@ -35,6 +35,6 @@ function keyTyped() {
 }
 
 function saveImage(extension='png'){
-    timestamp = urlPath[-1] + "_" + year() + "_" + month() + "_" + day() + "_" + hour() + "_" + minute() + "_" + second() + "_" + nf(millis(), 3, 0)
+    timestamp = year() + "_" + month() + "_" + day() + "_" + hour() + "_" + minute() + "_" + second() + "_" + nf(millis(), 3, 0)
     save(timestamp + extension)
 }
