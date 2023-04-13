@@ -1,8 +1,10 @@
 function range(start, stop, step) {
     let arr = []
+
     for (let iteration = start; iteration < stop; iteration += step) {
         arr.push(iteration)
     }
+
     return arr
 }
 
@@ -10,15 +12,30 @@ function linspace(start, stop, num, endPoint=true, retstep=false) {
     let arr = []
     let correction = endPoint ? 1 : 0
     let step = (stop - start) / (num - correction)
+
     for (let iteration=0; iteration < num; iteration++) {
         arr.push(start + iteration*step)
     }
+
     if (retstep) {
         return [arr, step]
     }
     else {
         return arr
     }
+}
+
+function randomWeighted(items, weights) {
+    for (let i = 1; i < weights.length; i++)
+        weights[i] += weights[i - 1]
+
+    let random = Math.random() * weights[weights.length - 1]
+
+    for (i = 0; i < weights.length; i++)
+        if (weights[i] > random)
+            break
+
+    return items[i]
 }
 
 function drawDebugLines(layer, debugColor="magenta", debugWeight=1) {
