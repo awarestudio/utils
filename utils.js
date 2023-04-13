@@ -26,16 +26,33 @@ function linspace(start, stop, num, endPoint=true, retstep=false) {
 }
 
 function randomWeighted(items, weights) {
-    for (let i = 1; i < weights.length; i++)
-        weights[i] += weights[i - 1]
+    let cumulative_weights = [...weights]
 
-    let random = Math.random() * weights[weights.length - 1]
+    for (let index = 1; index < cumulative_weights.length; index++) {
+        cumulative_weights[index] += cumulative_weights[index-1]
+    }
 
-    for (i = 0; i < weights.length; i++)
-        if (weights[i] > random)
+    let r = Math.random() * cumulative_weights[cumulative_weights.length - 1]
+    
+    for (var index = 0; index < cumulative_weights.length; index++) {
+        if (cumulative_weights[index] > r) {
             break
+        }
+    }
+    return items[index]
+    
+    // var i;
 
-    return items[i]
+    // for (i = 1; i < weights.length; i++)
+    //     weights[i] += weights[i - 1];
+    
+    // var random = Math.random() * weights[weights.length - 1];
+    
+    // for (i = 0; i < weights.length; i++)
+    //     if (weights[i] > random)
+    //         break;
+    
+    // return items[i];
 }
 
 function drawDebugLines(layer, debugColor="magenta", debugWeight=1) {
