@@ -1,19 +1,33 @@
 class ColorMap {
-	constructor(colors, intervals) {
+	constructor(colors, intervals, lerp=false) {
 		this.colors = colors
-		this.intervals = [0].concat(intervals).concat([1])
+		this.intervals = intervals
+		this.lerp = lerp
 	}
 
-	getColor(value) {
-		for (var index = 0; index < this.intervals.length; index++) {
-			if (this.intervals[index] > value) {
+	getColor(color_value) {
+		let final_color = this.colors.slice(-1)[0]
+
+		for (var interval_index = 0; interval_index < this.intervals.length-1; interval_index++) {
+			let left_interval_value = this.intervals[interval_index]
+			let right_interval_value = this.intervals[interval_index + 1]
+
+			if (color_value < right_interval_value) {
+				if (this.lerp) {
+					let lerp_value = map(color_value, left_interval_value, right_interval_value, 0, 1)
+					final_color = lerpColor(
+						this.colors[interval_index],
+						this.colors[interval_index+1],
+						lerp_value
+					)
+				} else {
+					final_color = this.colors[interval_index]
+				}
 				break
 			}
-			else if (value == this.intervals.slice(-1)) {
-				return this.colors.slice(-1)[0]
-			}
 		}
-		return this.colors[index-1]
-			
+
+		return final_color
 	}
+
 }
