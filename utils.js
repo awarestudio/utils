@@ -49,13 +49,16 @@ function drawDebugLines(layer, debugColor="magenta", debugWeight=1) {
     layer.line(0, 0, layer.width, layer.height)
 }
 
-function keyTyped() {
-    if (key == 's') {
-        saveImage()
-    }
+function quadraticInterpolation(x, y, a) {
+    return Math.sqrt(x * x * (1 - a) + y * y * a)
 }
 
 function saveImage(extension='png'){
     timestamp = year() + "_" + month() + "_" + day() + "_" + hour() + "_" + minute() + "_" + second() + "_" + nf(millis(), 3, 0)
     save(timestamp + extension)
+}
+
+function saveGifWithTimestamp(duration, options){
+    timestamp = year() + "_" + month() + "_" + day() + "_" + hour() + "_" + minute() + "_" + second() + "_" + nf(millis(), 3, 0)
+    saveGif(timestamp, duration, options)
 }
